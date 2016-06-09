@@ -32,6 +32,7 @@
 <link rel="stylesheet" type="text/css" href="theme.css"/>
 
 <script src="remoteScript.js"></script>
+<script src="uscape.js"></script>
 
 <script>
 window.onload = function(){sexyBoot(function(){show("ls")});}
