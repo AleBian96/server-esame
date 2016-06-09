@@ -1,0 +1,21 @@
+<HTML>
+<link rel="stylesheet" type="text/css" href="loadfonts.css">
+<link rel="stylesheet" type="text/css" href="indexTheme.css">
+<form method="POST" id="login" action="remote.php">
+	<div id="rett"><div id="circle"><p>login</p></div></div>
+	<input type="text" name="name" placeholder="username" autocomplete="off">
+	<input type="password" name="pass" placeholder="password">
+	<input type="submit" value="ok">
+<form>
+<script>
+sexyBoot();
+function sexyBoot(){
+	var D = document.createElement("div");
+	D.style = "background:white;z-index:5000;position:absolute;top:0;left:0;width:100%;height:100%;"
+	document.body.appendChild(D);
+
+	setTimeout(function(){D.style.opacity = 0;},500);
+	setTimeout(function(){document.body.removeChild(D)},750);
+}
+</script>
+</HTML>

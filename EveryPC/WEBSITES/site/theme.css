@@ -1,0 +1,135 @@
+*{
+	font-size:2vmin;
+	overflow:hidden;
+	font-family: font4;
+	cursor:default;
+	transition: all 250ms ease-in-out;
+	outline:0;
+}
+::-webkit-scrollbar {
+    min-width:5px;
+    width: 1vmin;
+}
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+}
+::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    background: rgba(75,75,75,0.8);
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+}
+::-webkit-scrollbar-thumb:window-inactive {
+	background: rgba(75,75,75,0.4);
+}
+.display{
+	overflow-y:scroll;
+	position:absolute;
+	top:5%;
+	left:5%;
+	width:90%;
+	height:90%;
+	background:rgba(100,100,100,.75);
+}
+.folder, .file{
+	position:relative;
+	float:top;
+	margin-top:2vmin;
+	margin-left:2vmin;
+	width:40vmin;
+	height:4vmin;
+	border-radius:2vmin;
+}
+.folder{
+	background:rgba(255,140,0,.5);
+}
+.file{
+	background:rgba(0,0,255,.5);
+}
+.folder:hover, .folder:focus{
+	background:rgba(255,140,0,1);
+}
+.file:hover{
+	background:rgba(0,0,255,1);
+}
+.folder span, .file span{
+	position:absolute;
+	top:0;
+	left:2vmin;
+	width:10vmin;
+	height:10vmin;
+	pointer-events:none;
+	border:0;
+	outline:none;
+}
+.folder span{
+	background:url("img/folder.png");
+	background-size:4vmin 4vmin;
+	background-repeat:no-repeat;
+}
+.file span{
+	background:url("img/file.png");
+	background-size:4vmin 4vmin;
+	background-repeat:no-repeat;
+}
+.folder l, .file l{
+	position:absolute;
+	margin:auto;
+	margin-left:7vmin;
+	text-align:left;
+	width:100%;
+	height:100%;
+	font-size:3vmin;
+	pointer-events :none;
+}
+.reader{
+	overflow:auto;
+	position:absolute;
+	background:darkgrey;
+	color:black;
+	top:10%;
+	left:0;
+	width:100%;
+	height:90%;
+	z-index:5;
+	resize:none;
+	outline:none;
+}
+.menu{
+	position:absolute;
+	top:0;
+	left:0;
+	width:100%;
+	height:10%;
+	background:grey;
+	color:white;
+}
+.menu div button{
+	float:left;
+	background:rgb(75,75,75);
+	color:white;
+	outline:none;
+	border:0;
+	margin-left:5%;
+	width:45%;
+	height:100%;
+}
+.menu div button:hover{
+	background:red;
+}
+.menu div{
+	position:absolute;
+	right:1%;
+	top:12.5%;
+	width:20%;
+	height:75%;
+}
+.menu span{
+	position:absolute;
+	top:25%;
+	left:1%;
+	height:50%;
+	color:white;
+}
