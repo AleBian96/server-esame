@@ -7,7 +7,6 @@ function AJAX(php,send,output){
 	var R = new XMLHttpRequest();
 	R.open("POST",php,true);
 	R.send(send);
-	alert(send);
 	R.onreadystatechange = function(){
 		if(R.readyState==4){
 			response=R.responseText;
