@@ -30,77 +30,123 @@
 
 <link rel="stylesheet" type="text/css" href="loadfonts.css"/>
 <link rel="stylesheet" type="text/css" href="theme.css"/>
-
+<div tabindex=1000 onfocus="document.getElementsByClassName('file')[0].focus();document.getElementsByClassName('folder')[0].focus()"></div>
 <script src="remoteScript.js"></script>
 <script src="uscape.js"></script>
 
 <script>
 window.onload = function(){sexyBoot(function(){show("ls")});}
 function sexyBoot(exitFn){
-	var screen = document.createElement("div");
-	var loadBar = document.createElement("div");
+	var explorer = document.createElement("div");
+	var toolBox = document.createElement("div");
+	var reader = document.createElement("div");
 
-	screen.style.background="rgb(140,140,140)";
-	screen.style.position="absolute";
-	screen.style.top="0";
-	screen.style.left="0";
-	screen.style.width="100%";
-	screen.style.height="100%";
+	var bar1 = document.createElement("div");
+	var bar2 = document.createElement("div");
+	var bar3 = document.createElement("div");
 
-	loadBar.style.height=".5%";
-	loadBar.style.width="0";
-	loadBar.setAttribute("id","tmp123boot123");
-	loadBar.style.position="absolute";
-	loadBar.style.left="0";
-	loadBar.style.top="49.75%";
-	loadBar.style.background="black";
+	reader.style =
+		"background:rgb(0,230,190);"+
+		"width:0;height:.5%;"+
+		"position:absolute;top:49.75%;left:35%;";
+	toolBox.style =
+		"background:rgb(0,230,190);"+
+		"width:0;height:.5%;"+
+		"position:absolute;top:49.75%;left:20%;";
+	explorer.style =
+		"background:rgb(0,230,190);"+
+		"position:absolute;"+
+		"top:49.75%;left:5%;"+
+		"width:0;height:.5%;";
+	bar1.style.cssText = explorer.style.cssText;
+	bar2.style.cssText = toolBox.style.cssText;
+	bar3.style.cssText = reader.style.cssText;
 
-	document.body.appendChild(screen);
-	document.body.appendChild(loadBar);
+	document.body.appendChild(bar1);
+	document.body.appendChild(bar2);
+	document.body.appendChild(bar3);
 
-	var bar = document.getElementById("tmp123boot123");
-	setTimeout(function(){bar.style.width="30%";},500);
-	setTimeout(function(){bar.style.width="40%";},1000);
-	setTimeout(function(){bar.style.width="100%";},1500);
+	document.body.appendChild(explorer);
+	document.body.appendChild(toolBox);
+	document.body.appendChild(reader);
+
+	setTimeout(function(){bar1.style.width="15%";explorer.style.width="15%"},500);
+	setTimeout(function(){bar2.style.width="15%";toolBox.style.width="15%"},1000);
+	setTimeout(function(){bar3.style.width="60%";reader.style.width="60%";},1500);
 	setTimeout(function(){
-		bar.setAttribute("id","");
-		bar.style = "";
-		bar.className += " display";
+		bar1.style = "";
+		bar2.style = "";
+		bar3.style = "";
+		toolBox.style = "";
+		reader.style = "";
+		explorer.style = "";
+		bar1.classList.add("bar");
+		bar2.classList.add("bar");
+		bar3.classList.add("bar");
+		bar1.setAttribute("id","bar1");
+		bar2.setAttribute("id","bar2");
+		bar3.setAttribute("id","bar3");
+		toolBox.setAttribute("id","toolBox");
+		reader.setAttribute("id","reader");
+		explorer.classList.add("display");
 		exitFn();
 	},2000);
 }
 
-function show(cmd,whr=document.getElementsByClassName("display")[0]){
+function toolBoxButton(){
+	var x;
+}
+
+function showFoldEl(){
+	function showEl(el,i,time){
+		setTimeout(function(){el[i].style.opacity=1;},time*i);
+	}
+	function concat(obj1,obj2){
+		var A = new Array();
+		for(i=0;i<obj1.length;i++)A.push(obj1[i]);
+		for(i=0;i<obj2.length;i++)A.push(obj2[i]);
+		return A;
+	}
+	var F = concat(document.getElementsByClassName("folder"),document.getElementsByClassName("file"));
+	for(i=0;i<F.length;i++)showEl(F,i,50);
+}
+
+function show(cmd,displayN=0){
 	PC(cmd,function(){
-		whr.innerHTML="";
+		whr = document.getElementsByClassName("display")[displayN];
+
+		whr.innerHTML= "";
 		whr.scrollTop = 0;
 		T = response.split(endline);
-		if(cmd!="ls")show("ls");
+		if(cmd!="ls")show("ls",displayN);
+		if(cmd!="ls")return;
 		for(i=0;i<T.length-1;i++){
-			var div = document.createElement("div");
-			var img = document.createElement("span");
-			div.innerHTML+="<l>"+T[i]+"</l>";
-			div.setAttribute("open",T[i]);
-			div.setAttribute("tabindex",i+1);
+			var foldEl = document.createElement("div");
+				var img = document.createElement("span");
+			foldEl.innerHTML+="<l>"+T[i]+"</l>";
+			foldEl.setAttribute("open",T[i]);
+			foldEl.style.opacity=0;
+			foldEl.setAttribute("tabindex",i+1);
 			if(T[i].indexOf(".") != -1){
-				div.classList.add("file");
-				div.onclick = function(){
+				foldEl.classList.add("file");
+				foldEl.onclick = function(){
 					var fName = this.getAttribute("open");
 					var textReader = document.createElement("textArea");
-					var popUpMenu = document.createElement("div");
-					var save = document.createElement("button");
-					var close = document.createElement("button");
-					var btnContainer = document.createElement("div");
-					var fileName = document.createElement("span");
+						var popUpMenu = document.createElement("div");
+							var btnContainer = document.createElement("div");
+								var save = document.createElement("button");
+								var close = document.createElement("button");
+						var fileName = document.createElement("span");
+
 					fileName.innerHTML = folder+fName;
 					textReader.classList.add("reader");
 					PC("read "+fName,function(){
 						response = response.split(endline).join("\n");
 						text = response.substring(0,response.length-2);
 						textReader.innerHTML = text;
-						fileName.innerHTML += " - "+text.split("\n").length+" line/s";
 						document.body.appendChild(textReader);
 						textReader.focus();
+						textReader.setSelectionRange(0,0);
 						textReader.onkeydown = function(){
 							var K = event.keyCode || event.which;
 							if(K == 9){
@@ -129,16 +175,15 @@ function show(cmd,whr=document.getElementsByClassName("display")[0]){
 					popUpMenu.appendChild(fileName);
 				}
 			}else{
-				div.classList.add("folder");
-				div.onclick = function(){
-					//var d = document.createElement("div");
-					//display.setAttribute("class","display");
+				foldEl.classList.add("folder");
+				foldEl.onclick = function(){
 					show("cd "+this.getAttribute("open"));
 				};
 			}
-			div.appendChild(img);
-			whr.appendChild(div);
+			foldEl.appendChild(img);
+			whr.appendChild(foldEl);
 		}
+		showFoldEl();
 	});
 }
 </script>

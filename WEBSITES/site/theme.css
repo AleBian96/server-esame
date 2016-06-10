@@ -1,59 +1,108 @@
+body{
+	position:absolute;
+	top:0;
+	left:0;
+	width:100%;
+	height:100%;
+	background:rgb(140,140,140);
+}
 *{
 	font-size:2vmin;
 	overflow:hidden;
 	font-family: font4;
 	cursor:default;
-	transition: all 250ms ease-in-out;
+	transition: all 150ms ease-in-out;
 	outline:0;
+	
 }
 ::-webkit-scrollbar {
-    min-width:5px;
-    width: 1vmin;
+	min-width:5px;
+	width: 1vmin;
 }
 ::-webkit-scrollbar-track {
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-    -webkit-border-radius: 10px;
-    border-radius: 10px;
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	-webkit-border-radius: 10px;
+	border-radius: 10px;
 }
 ::-webkit-scrollbar-thumb {
-    -webkit-border-radius: 10px;
-    border-radius: 10px;
-    background: rgba(75,75,75,0.8);
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+	-webkit-border-radius: 10px;
+	border-radius: 10px;
+	background: rgba(75,75,75,0.8);
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
 }
 ::-webkit-scrollbar-thumb:window-inactive {
 	background: rgba(75,75,75,0.4);
 }
+.display, #reader, .reader, #toolBox{
+	background:rgb(75,75,75);	
+	top:15%;
+	height:80%;
+	padding:.5%;
+	box-sizing: border-box;
+}
 .display{
 	overflow-y:scroll;
 	position:absolute;
-	top:5%;
 	left:5%;
-	width:90%;
-	height:90%;
-	background:rgba(100,100,100,.75);
+	width:15%;
+	border-radius:0 0 0 2vmin;
+}
+#reader, .reader{
+	position:absolute;
+	left:30%;
+	width:65%;
+	border-radius:0 0 2vmin 0;
+}
+#toolBox{
+	overflow-y:scroll;
+	position:absolute;
+	left:20%;
+	width:10%;
+}
+#toolBox div{
+	
+}
+.bar{
+	position:absolute;
+	top:5%;
+	width:100%;
+	height:10%;
+	background:rgb(0,230,190);
+	z-index:5;
+}
+.bar#bar1{
+	border-radius:2vmin 0 0 0;
+	left:5%;
+	width:15%;
+}
+.bar#bar2{
+	left:20%;
+	width:10%;
+}
+.bar#bar3{
+	border-radius:0 2vmin 0 0;
+	left:30%;
+	width:65%;
 }
 .folder, .file{
 	position:relative;
 	float:top;
-	margin-top:2vmin;
-	margin-bottom:2vmin;
-	margin-left:2vmin;
-	width:40vmin;
+	margin-top:2%;
+	width:100%;
 	height:4vmin;
 	border-radius:2vmin;
 }
 .folder{
-	background:rgba(255,140,0,.5);
+	background:rgba(0,230,200,.75);
 }
 .file{
-	background:rgba(0,0,255,.5);
+	background:rgba(0,255,150,.75);
 }
 .folder:hover, .folder:focus{
-	background:rgba(255,140,0,1);
+	background:rgb(0,230,190);
 }
-.file:hover{
-	background:rgba(0,0,255,1);
+.file:hover, .file:focus{
+	background:rgb(0,255,150);
 }
 .folder span, .file span{
 	position:absolute;
@@ -86,14 +135,11 @@
 	pointer-events :none;
 }
 .reader{
+	width:60%:
+	height:75%;
 	overflow:auto;
-	position:absolute;
 	background:darkgrey;
 	color:black;
-	top:10%;
-	left:0;
-	width:100%;
-	height:90%;
 	z-index:5;
 	resize:none;
 	outline:none;

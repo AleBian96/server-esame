@@ -18,7 +18,7 @@ else
 		echo '<a href="index.php?comando=logout">Clicca qui per scollegarti </a>';
 	}
 	else
-		if(isset($_POST["user"])) //L'utente ha già effettuato login
+		if(isset($_POST["user"])) //L'utente ha gi%uFFFD effettuato login
 	{
 		notice("POST");
 		$conn= database("chatDB");
@@ -37,7 +37,7 @@ else
 		{
 			$_SESSION["utenteCollegato"]=$user;
 			echo "Login effettuato con successo! <br>";
-			echo "<a href='index.php'>Clicca qui per proseguire>/a>";
+			echo "<a href='index.php'>Clicca qui per proseguire</a>";
 		}
 		$conn->close();
 	}
@@ -49,6 +49,7 @@ else
 		Password <input type="password" name="pass" /><br>
 		<input type="submit" value="LOGIN" />
 		</form>
+		<a href="form.php">Clicca qui per registrarti!</a>
 		<?php
 	}
 		?>
