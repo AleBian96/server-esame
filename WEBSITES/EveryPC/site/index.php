@@ -2,8 +2,8 @@
 	$W = isset($_POST["cmd"]) && $_POST["cmd"] == "wrong";
 ?>
 <HTML>
-<link rel="stylesheet" type="text/css" href="loadfonts.css">
-<link rel="stylesheet" type="text/css" href="indexTheme.css">
+<link rel="stylesheet" type="text/css" href="remoteStyle/loadfonts.css">
+<link rel="stylesheet" type="text/css" href="remoteStyle/indexTheme.css">
 <form method="POST" id="login" action="remote.php" onsubmit="sexyExit()">
 	<div id="rett"><div id="circle"><p>login</p></div></div>
 	<input type="text" name="name" placeholder="username" autocomplete="off" autocapitalize="off" spellcheck="false">

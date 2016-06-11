@@ -1,4 +1,4 @@
-baseFolder = "WEBSITES/site/remoteFolder/"+personalFolder+"/";
+baseFolder = "WEBSITES/EveryPC/remoteFolder/"+personalFolder+"/";
 folder = "";
 response = "";
 
