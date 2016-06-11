@@ -24,12 +24,14 @@ public class PHPInterpreter{
 
 		p.waitFor();
 
-		String line = "",code = "";
+		String line = "",code = "";boolean died=false;
+		if(DEV)while((line = err.readLine()) != null)
+			{code += line+"\n";died=true;}
+
+		if(died)code+="die();";
+
 		while((line = str.readLine()) != null)
 			code += line+"\n";
-
-		if(DEV)while((line = err.readLine()) != null)
-			System.out.println(line);
 
 		File T = File.createTempFile(getRandomString(charSet,8),".tmp");
 		Writer w = new BufferedWriter(new FileWriter(T));

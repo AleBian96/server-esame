@@ -1,5 +1,5 @@
 <?php
-$username=$_GET["test"];
+$username=$_POST["test"];
 if(($username)<8)
 {echo"username troppo corto";}
 else{

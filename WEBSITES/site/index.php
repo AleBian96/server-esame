@@ -6,12 +6,13 @@
 <link rel="stylesheet" type="text/css" href="indexTheme.css">
 <form method="POST" id="login" action="remote.php" onsubmit="sexyExit()">
 	<div id="rett"><div id="circle"><p>login</p></div></div>
-	<input type="text" name="name" placeholder="username" autocomplete="off">
+	<input type="text" name="name" placeholder="username" autocomplete="off" autocapitalize="off" spellcheck="false">
 	<input type="password" name="pass" placeholder="password">
 	<input type="submit" value="ok">
 <form>
 <script>
 <?php if($W){ echo "loginError();"; }else{ echo "sexyBoot();";} ?>
+document.getElementsByName("name")[0].focus();
 function sexyBoot(){
 	var D = document.createElement("div");
 	D.style = "background:white;z-index:5000;position:absolute;top:0;left:0;width:100%;height:100%;"

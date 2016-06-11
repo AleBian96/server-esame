@@ -13,9 +13,11 @@ function controlla(){
 }
 </script></head>
 <body>
-<form action="registra.php"method="GET">
+<form action="registra.php"method="POST" onsubmit="controlla()";>
 Inserisci l'username:
-<input type="text" id="username" name="username" onsubmit="controlla();">
+<input type="text" id="username" name="username">
+Inserisi la password:
+<input type="password" id="password" name="password">
 <div id="risposta"></div>
 <input type="submit" value="invia">
 </form>

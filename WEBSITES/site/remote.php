@@ -30,11 +30,12 @@
 
 <link rel="stylesheet" type="text/css" href="loadfonts.css"/>
 <link rel="stylesheet" type="text/css" href="theme.css"/>
-<div tabindex=1000 onfocus="document.getElementsByClassName('file')[0].focus();document.getElementsByClassName('folder')[0].focus()"></div>
+<div tabindex=100000 onfocus="document.getElementsByClassName('file')[0].focus();document.getElementsByClassName('folder')[0].focus()"></div>
 <script src="remoteScript.js"></script>
 <script src="uscape.js"></script>
 
 <script>
+document.body.oncontextmenu = function(){return false;}
 window.onload = function(){sexyBoot(function(){show("ls")});}
 function sexyBoot(exitFn){
 	var explorer = document.createElement("div");
@@ -61,6 +62,14 @@ function sexyBoot(exitFn){
 	bar1.style.cssText = explorer.style.cssText;
 	bar2.style.cssText = toolBox.style.cssText;
 	bar3.style.cssText = reader.style.cssText;
+
+	bar1.style.width = "15%";
+	bar2.style.width = "15%";
+	bar3.style.width = "60%";
+
+	bar1.style.background = "rgb(75,75,75)";
+	bar2.style.background = "rgb(75,75,75)";
+	bar3.style.background = "rgb(75,75,75)";
 
 	document.body.appendChild(bar1);
 	document.body.appendChild(bar2);
@@ -89,12 +98,30 @@ function sexyBoot(exitFn){
 		toolBox.setAttribute("id","toolBox");
 		reader.setAttribute("id","reader");
 		explorer.classList.add("display");
+		toolBoxButton();
 		exitFn();
 	},2000);
 }
 
 function toolBoxButton(){
-	var x;
+	var tb = document.getElementById("toolBox");
+
+	var refresh = document.createElement("div");
+	refresh.innerHTML = "<p>refresh</p>";
+	refresh.onclick = function(){show("ls");}
+	tb.appendChild(refresh);
+
+	var back = document.createElement("div");
+	back.onclick = function(){show("cd ..");}
+	back.innerHTML = "<p>back</p>";
+	tb.appendChild(back);
+
+	var newF = document.createElement("div");
+	newF.onclick = function(){
+		openFile("test.txt");
+	};
+	newF.innerHTML = "<p>new</p>";
+	tb.appendChild(newF);
 }
 
 function showFoldEl(){
@@ -111,10 +138,11 @@ function showFoldEl(){
 	for(i=0;i<F.length;i++)showEl(F,i,50);
 }
 
+window.onresize = function(){document.body.style.minWidth = window.innerHeight*(16/9);}
+
 function show(cmd,displayN=0){
 	PC(cmd,function(){
 		whr = document.getElementsByClassName("display")[displayN];
-
 		whr.innerHTML= "";
 		whr.scrollTop = 0;
 		T = response.split(endline);
@@ -136,14 +164,21 @@ function show(cmd,displayN=0){
 							var btnContainer = document.createElement("div");
 								var save = document.createElement("button");
 								var close = document.createElement("button");
-						var fileName = document.createElement("span");
+						var fileName = document.createElement("input");
 
-					fileName.innerHTML = folder+fName;
+					fileName.value = fName;
+					fileName.onchange = function(){
+						fName = this.value;
+					}
 					textReader.classList.add("reader");
 					PC("read "+fName,function(){
 						response = response.split(endline).join("\n");
 						text = response.substring(0,response.length-2);
 						textReader.innerHTML = text;
+						textReader.spellcheck = false;
+						textReader.autocapitalize = "off";
+						textReader.autocorrect = "off";
+						textReader.wrap = "off";
 						document.body.appendChild(textReader);
 						textReader.focus();
 						textReader.setSelectionRange(0,0);
@@ -158,21 +193,35 @@ function show(cmd,displayN=0){
 						}
 						textReader.scrollTop=0;
 					});
-					popUpMenu.classList.add("menu");
-					document.body.appendChild(popUpMenu);
+					block = document.createElement("div");
+					block.classList.add("display");
+					block.style.opacity=.25;
+					block.style.width="25%";
+					fileMenu = document.createElement("div");
+					fileMenu.classList.add("bar");
+					fileMenu.setAttribute("id","bar3");
 					save.innerHTML = "Save";
 					save.onclick = function(){
 						AJAX("save.php","dir="+baseFolder+folder+fName+"&text="+escape(textReader.value),function(){});
 					};
 					close.innerHTML = "Close";
-					close.onclick = function(){
-						document.body.removeChild(popUpMenu);
-						document.body.removeChild(textReader);
+					close.onclick = function closeReader(){
+						textReader.style.opacity=0;
+						fileMenu.style.opacity=0;
+						setTimeout(function(){
+							document.body.removeChild(block);
+							document.body.removeChild(fileMenu);
+							document.body.removeChild(textReader);
+							show("ls");
+						},200);
 					};
+					btnContainer.style.overflow="visible";
 					btnContainer.appendChild(close);
 					btnContainer.appendChild(save);
-					popUpMenu.appendChild(btnContainer);
-					popUpMenu.appendChild(fileName);
+					fileMenu.appendChild(btnContainer);
+					fileMenu.appendChild(fileName);
+					document.body.appendChild(fileMenu);
+					document.body.appendChild(block);
 				}
 			}else{
 				foldEl.classList.add("folder");

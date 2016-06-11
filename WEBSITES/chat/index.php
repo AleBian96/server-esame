@@ -5,7 +5,7 @@ session_start();
 <head><title>Accesso con login</title></head>
 <body>
 <?php
-if(isset($_GET["comando"])&& $_GET["comando"]=="logout")
+if(isset($_POST["comando"])&& $_POST["comando"]=="logout")
 {
 	unset($_SESSION["utenteCollegato"]);
 	echo "Logout riuscito";
@@ -20,7 +20,6 @@ else
 	else
 		if(isset($_POST["user"])) //L'utente ha gi%uFFFD effettuato login
 	{
-		notice("POST");
 		$conn= database("chatDB");
 		$user=$_POST["user"];
 		$pass=$_POST["pass"];
@@ -49,7 +48,7 @@ else
 		Password <input type="password" name="pass" /><br>
 		<input type="submit" value="LOGIN" />
 		</form>
-		<a href="form.php">Clicca qui per registrarti!</a>
+		<a href="registra.php">Clicca qui per registrarti!</a>
 		<?php
 	}
 		?>
