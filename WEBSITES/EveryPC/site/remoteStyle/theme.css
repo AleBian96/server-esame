@@ -95,7 +95,11 @@ body{
 #toolBox div p{
 	color:black;
 	text-align:center;
-	font-size:1.5vw;
+	font-size:1vw;
+}
+#toolBox div img{
+	margin-top:20%;
+	margin-left:20%;
 }
 .bar{
 	position:absolute;
@@ -110,6 +114,7 @@ body{
 	left:4vmin;
 }
 .bar#bar1{
+	overflow:visible;
 	border-radius:2vmin 0 0 0;
 	left:5%;
 	width:15%;

@@ -82,5 +82,5 @@ function showFoldEl(){
 		return A;
 	}
 	var F = concat(document.getElementsByClassName("folder"),document.getElementsByClassName("file"));
-	for(i=0;i<F.length;i++)showEl(F,i,50);
+	for(i=0;i<F.length;i++)showEl(F,i,10);
 }
