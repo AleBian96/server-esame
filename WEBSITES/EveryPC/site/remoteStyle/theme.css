@@ -97,11 +97,6 @@ body{
 	text-align:center;
 	font-size:1vw;
 }
-#toolBox div img{
-	filter:blur(1px);
-	margin-top:20%;
-	margin-left:20%;
-}
 .bar{
 	position:absolute;
 	top:5%;

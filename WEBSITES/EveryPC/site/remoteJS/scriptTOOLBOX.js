@@ -3,7 +3,7 @@
 Mode = "";
 function toolBoxButton(){
 	var tb = document.getElementById("toolBox");
-	var style = "height='60%' width='60%'";
+	var style = "height='40%' width='40%' style='margin-left:30%;margin-top:30%;'";
 
 	//HOME BUTTON
 	var home = document.createElement("div");
@@ -14,18 +14,18 @@ function toolBoxButton(){
 	//REFRESH BUTTON
 	var refresh = document.createElement("div");
 	refresh.onclick = function(){show("ls");}
-	refresh.innerHTML = "<img src='../remoteStyle/img/refresh.png' height='60%' width='60%'></img>";
+	refresh.innerHTML = "<img src='../remoteStyle/img/refresh.png' "+style+"/>";
 	tb.appendChild(refresh);
 
 	//BACK BUTTON
 	var back = document.createElement("div");
-	back.innerHTML = "<img src='../remoteStyle/img/back.png' height='60%' width='60%'></img>";
+	back.innerHTML = "<img src='../remoteStyle/img/back.png' "+style+"/>";
 	back.onclick = function(){show("cd ..");}
 	tb.appendChild(back);
 
 	//NEW FILE BUTTON
 	var newF = document.createElement("div");
-	newF.innerHTML = "<img src='../remoteStyle/img/newfile.png' height='60%' width='60%'></img>";
+	newF.innerHTML = "<img src='../remoteStyle/img/newfile.png' "+style+"/>";
 	newF.onclick = function(){
 		var epoch = (new Date).getTime();
 		var name = "FILE_"+epoch+".txt";
@@ -35,7 +35,7 @@ function toolBoxButton(){
 
 	//NEW FOLDERBUTTON
 	var newFold = document.createElement("div");
-	newFold.innerHTML = "<img src='../remoteStyle/img/newfolder.png' height='60%' width='60%'></img>";
+	newFold.innerHTML = "<img src='../remoteStyle/img/newfolder.png' "+style+"/>";
 	newFold.onclick = function(){
 		var epoch = (new Date).getTime();
 		var name = "FOLDER_"+epoch;
@@ -45,7 +45,7 @@ function toolBoxButton(){
 
 	//DELETE BUTTON
 	var del= document.createElement("div");
-	del.innerHTML = "<img src='../remoteStyle/img/delete.png' height='60%' width='60%'></img>";
+	del.innerHTML = "<img src='../remoteStyle/img/delete.png' "+style+"/>";
 	del.onclick = function(){
 		if(Mode == ""){
 			Mode = "delete";
@@ -59,7 +59,7 @@ function toolBoxButton(){
 
 	//RENAME BUTTON
 	var ren= document.createElement("div");
-	ren.innerHTML = "<img src='../remoteStyle/img/rename.png' height='60%' width='60%'></img>";
+	ren.innerHTML = "<img src='../remoteStyle/img/rename.png' "+style+"/>";
 	ren.onclick = function(){
 		if(Mode == ""){
 			Mode = "rename";

@@ -158,6 +158,7 @@ function show(cmd,displayN=0){
 						bgform.appendChild(input);
 						document.body.appendChild(bgform);
 						document.body.appendChild(block);
+						input.focus();
 						return;
 					}
 					show("cd "+fName);
