@@ -3,6 +3,13 @@
 Mode = "";
 function toolBoxButton(){
 	var tb = document.getElementById("toolBox");
+	var style = "height='60%' width='60%'";
+
+	//HOME BUTTON
+	var home = document.createElement("div");
+	home.onclick = function(){show("cd");}
+	home.innerHTML = "<img src='../remoteStyle/img/home.png' "+style+"/>";
+	tb.appendChild(home);
 
 	//REFRESH BUTTON
 	var refresh = document.createElement("div");

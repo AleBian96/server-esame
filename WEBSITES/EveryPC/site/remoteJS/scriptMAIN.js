@@ -9,7 +9,7 @@ function show(cmd,displayN=0){
 		for(i=0;i<T.length-1;i++){
 			var foldEl = document.createElement("div");
 			var img = document.createElement("span");
-			
+
 			foldEl.innerHTML+="<l>"+T[i]+"</l>";
 			foldEl.setAttribute("open",T[i]);
 			foldEl.style.opacity=0;
@@ -20,6 +20,29 @@ function show(cmd,displayN=0){
 					var fName = this.getAttribute("open");
 					if(Mode == "delete"){
 						AJAX("delete.php","file="+baseFolder+folder+fName,function(){show("ls");});
+						return;
+					}
+					if(Mode == "rename"){
+						var bgform = document.createElement("div");
+						var input = document.createElement("input");
+						var block = document.createElement("div");
+						input.placeholder="new name";
+						block.classList.add("display");
+						block.style.width="25%";
+						block.style.opacity=.25;
+						bgform.classList.add("inputField");
+						input.onkeydown = function(){
+							var K = event.keyCode || event.which;
+							if(K == 13){
+								AJAX("rename.php","oldname="+fName+"&newname="+this.value+"&dir="+baseFolder+folder,function(){show("ls");});
+								document.body.removeChild(block);
+								document.body.removeChild(bgform);
+							}
+						};
+						bgform.appendChild(input);
+						document.body.appendChild(bgform);
+						document.body.appendChild(block);
+						input.focus();
 						return;
 					}
 					var imgReader = document.createElement("img");
@@ -110,11 +133,34 @@ function show(cmd,displayN=0){
 			}else{
 				foldEl.classList.add("folder");
 				foldEl.onclick = function(){
+					var fName = this.getAttribute("open");
 					if(Mode == "delete"){
-						AJAX("deleteFolder.php","folder="+baseFolder+folder+this.getAttribute("open"),function(){show("ls");});
+						AJAX("deleteFolder.php","folder="+baseFolder+folder+fName,function(){show("ls");});
 						return;
 					}
-					show("cd "+this.getAttribute("open"));
+					if(Mode == "rename"){
+						var bgform = document.createElement("div");
+						var input = document.createElement("input");
+						var block = document.createElement("div");
+						input.placeholder="new name";
+						block.classList.add("display");
+						block.style.width="25%";
+						block.style.opacity=.25;
+						bgform.classList.add("inputField");
+						input.onkeydown = function(){
+							var K = event.keyCode || event.which;
+							if(K == 13){
+								AJAX("rename.php","oldname="+fName+"&newname="+this.value+"&dir="+baseFolder+folder,function(){show("ls");});
+								document.body.removeChild(block);
+								document.body.removeChild(bgform);
+							}
+						};
+						bgform.appendChild(input);
+						document.body.appendChild(bgform);
+						document.body.appendChild(block);
+						return;
+					}
+					show("cd "+fName);
 				};
 			}
 			foldEl.appendChild(img);

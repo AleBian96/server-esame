@@ -30,8 +30,9 @@ function PC(value,output){
 			toSend="ls -L --group-directories-first "+baseFolder+folder;
 				break;
 		case "cd":
-			if(V.length==1 || V[1]==""){folder="";break;}
-			if(V[1] == ".."){
+			if(V.length==1 || V[1]==""){
+				folder="";
+			}else if(V[1] == ".."){
 				if(folder.split("/")[1]=="" || folder=="")folder="";
 				var s = folder.split("/");
 				folder = "";
