@@ -134,6 +134,7 @@ body{
 	border-radius:2vmin;
 }
 .folder{
+	font-weight:bold;
 	background:rgba(0,230,200,.75);
 }
 .file{
