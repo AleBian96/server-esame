@@ -8,21 +8,21 @@ function toolBoxButton(){
 	//HOME BUTTON
 	var home = document.createElement("div");
 	home.onclick = function(){show("cd");}
-	home.innerHTML = "<img src='../remoteStyle/img/iconpack1/Home.png' "+style+"/>";
+	home.innerHTML = "<img src='../remoteStyle/img/iconpack3/Home.png' "+style+"/>";
 
 	//REFRESH BUTTON
 	var refresh = document.createElement("div");
 	refresh.onclick = function(){show("ls");}
-	refresh.innerHTML = "<img src='../remoteStyle/img/iconpack1/Refresh.png' "+style+"/>";
+	refresh.innerHTML = "<img src='../remoteStyle/img/iconpack3/Refresh.png' "+style+"/>";
 
 	//BACK BUTTON
 	var back = document.createElement("div");
-	back.innerHTML = "<img src='../remoteStyle/img/iconpack1/Previous.png' "+style+"/>";
+	back.innerHTML = "<img src='../remoteStyle/img/iconpack3/Previous.png' "+style+"/>";
 	back.onclick = function(){show("cd ..");}
 
 	//NEW FILE BUTTON
 	var newF = document.createElement("div");
-	newF.innerHTML = "<img src='../remoteStyle/img/iconpack1/Add_File.png' "+style+"/>";
+	newF.innerHTML = "<img src='../remoteStyle/img/iconpack3/Add_File.png' "+style+"/>";
 	newF.onclick = function(){
 		var epoch = (new Date).getTime();
 		var name = "FILE_"+epoch+".txt";
@@ -31,7 +31,7 @@ function toolBoxButton(){
 
 	//NEW FOLDERBUTTON
 	var newFold = document.createElement("div");
-	newFold.innerHTML = "<img src='../remoteStyle/img/iconpack1/Add_Folder.png' "+style+"/>";
+	newFold.innerHTML = "<img src='../remoteStyle/img/iconpack3/Add_Folder.png' "+style+"/>";
 	newFold.onclick = function(){
 		var epoch = (new Date).getTime();
 		var name = "FOLDER_"+epoch;
@@ -40,7 +40,7 @@ function toolBoxButton(){
 
 	//DELETE BUTTON
 	var del= document.createElement("div");
-	del.innerHTML = "<img src='../remoteStyle/img/iconpack1/Delete.png' "+style+"/>";
+	del.innerHTML = "<img src='../remoteStyle/img/iconpack3/Delete.png' "+style+"/>";
 	del.onclick = function(){
 		if(Mode == ""){
 			Mode = "delete";
@@ -53,7 +53,7 @@ function toolBoxButton(){
 
 	//RENAME BUTTON
 	var ren= document.createElement("div");
-	ren.innerHTML = "<img src='../remoteStyle/img/iconpack1/Rename.png' "+style+"/>";
+	ren.innerHTML = "<img src='../remoteStyle/img/iconpack3/Rename.png' "+style+"/>";
 	ren.onclick = function(){
 		if(Mode == ""){
 			Mode = "rename";

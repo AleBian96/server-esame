@@ -134,7 +134,6 @@ body{
 	border-radius:2vmin;
 }
 .folder{
-	font-weight:bold;
 	background:rgba(0,230,200,.75);
 }
 .file{
@@ -151,30 +150,33 @@ body{
 	top:.25vmin;
 	width:10vmin;
 	height:10vmin;
-	margin-left:2vmin;
+	margin-left:1vmin;
 	pointer-events:none;
 	border:0;
 	outline:none;
 }
 .folder span{
-	background:url("img/iconpack1/Folder.png");
+	background:url("img/iconpack3/Folder.png");
 	background-size:3.5vmin 3.5vmin;
 	background-repeat:no-repeat;
 }
 .file span{
-	background:url("img/iconpack1/File.png");
+	background:url("img/iconpack3/File.png");
 	background-size:3.5vmin 3.5vmin;
 	background-repeat:no-repeat;
 }
-.folder l, .file l{
+.folder input, .file input{
 	position:absolute;
-	margin-top:.75vmin;
-	margin-left:7vmin;
+	margin-left:4.5vmin;
 	text-align:left;
 	width:100%;
 	height:100%;
-	font-size:2.5vmin;
+	font-size:2vmin;
+	color:black;
 	pointer-events :none;
+}
+.folder input{
+	font-weight:bold;
 }
 .reader{
 	width:64%;

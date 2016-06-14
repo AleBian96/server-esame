@@ -1,14 +1,22 @@
+<?php
+	sessionStart();
+	$utente = $_SESSION["utenteCollegato"];
+?>
 <HTML>
 <form method="post" action="send.php">
-<input type="hidden" name="FROM" value="NOME_USER"/>
-<input type="text" placeholder="TO" name="TO"/>
-<input type="text" placeholder="Message" name="MSG"/>
+<?php
+	if(isset($utente))echo "V"; else echo "X";
+	echo '<input type="hidden" name="FROM" value="$utente"/>'
+?>
+<input type="text" placeholder="TO" name="TO"/><br>
+<input type="text" placeholder="Message" name="MSG"/><br>
 <button>INVIA</button>
 </form>
 
 <?php
+	echo "utente=".$utente;
 	$db = database("chat");
-	$Q = "SELECT * FROM msg WHERE receiver='NOME_USER'";
+	$Q = "SELECT * FROM msg WHERE receiver='$utente'";
 	$R = $db->query($Q);
 	while ($r = $R->fetchArray()) {
 		$sender = $r["sender"];

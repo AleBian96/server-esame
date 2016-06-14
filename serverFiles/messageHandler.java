@@ -51,17 +51,17 @@ public class messageHandler{
 	}
 
 	public void handle() throws Exception {
-	this.handleHeader();
-	if(this.Method.equals("POST"))handleBody();
-	else if(this.Path.contains("?"))this.Parameters = this.Path.split("?")[1];
-	this.Parameters = Parameters == null ? "" : Parameters;
+		this.handleHeader();
+		if(this.Method.equals("POST"))handleBody();
+		else if(this.Path.contains("?"))this.Parameters = this.Path.split("?")[1];
+		this.Parameters = Parameters == null ? "" : Parameters;
 	}
 
 	private void handleHeader() throws Exception {
-	this.reset();
-	reqHandler(in.readLine());
-	for(;!readHeader(););
-	return;
+		this.reset();
+		reqHandler(in.readLine());
+		for(;!readHeader(););
+		return;
 	}
    public void handleBody() throws Exception {
 		int x;
@@ -157,7 +157,6 @@ public class messageHandler{
 			if((h = retParam(x,"Upgrade"))!=null){Upgrade=h;continue;}
 			if((h = retParam(x,"Via"))!=null){Via=h;continue;}
 			if((h = retParam(x,"Warning"))!=null){Warning=h;continue;}
-
 		}
 		return true;
 	}

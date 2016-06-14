@@ -1,5 +1,5 @@
 <?php
-session_start();
+sessionStart();
 ?>
 <html>
 <head><title>Accesso con login</title></head>
@@ -20,7 +20,7 @@ else
 	else
 		if(isset($_POST["user"])) //L'utente ha gi%uFFFD effettuato login
 	{
-		$conn= database("chatDB");
+		$conn= database("chat");
 		$user=$_POST["user"];
 		$pass=$_POST["pass"];
 		$passCifrata=crypt($pass);
@@ -36,7 +36,8 @@ else
 		{
 			$_SESSION["utenteCollegato"]=$user;
 			echo "Login effettuato con successo! <br>";
-			echo "<a href='index.php'>Clicca qui per proseguire</a>";
+			echo $_SESSION["utenteCollegato"];
+			echo "<a href='CHAT.php'>Clicca qui per proseguire</a>";
 		}
 		$conn->close();
 	}

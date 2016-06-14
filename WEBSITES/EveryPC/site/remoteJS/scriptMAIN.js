@@ -10,7 +10,7 @@ function show(cmd,displayN=0){
 			var foldEl = document.createElement("div");
 			var img = document.createElement("span");
 
-			foldEl.innerHTML+="<l>"+T[i]+"</l>";
+			foldEl.innerHTML+="<input value="+T[i]+" disabled/>";
 			foldEl.setAttribute("open",T[i]);
 			foldEl.style.opacity=0;
 			foldEl.setAttribute("tabindex",i+1);

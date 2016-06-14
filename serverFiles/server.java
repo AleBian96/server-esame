@@ -9,15 +9,17 @@ public class server{
 		try{
 			for(int i=0;i<6;i++)args[i].charAt(0);
 		}catch(Exception e){
-			System.out.println("\u001B[31m[ERROR]: \u001B[0m"+"Usage: server [domain_name][token][port][site_folder][site_index][DEV]");
+			System.out.println("\u001B[31m[ERROR]: \u001B[0m"+"Usage: server [domain_name][token][port][site_folder][site_index][DEV][DDNS]");
 			System.exit(1);
 		}
-		System.out.println("\u001B[31m[SERVER]: \u001B[0m"+"Starting DDNS");
-		try{
-			URL url = new URL("https://duckdns.org/update/"+args[0]+"/"+args[1]);
-			String l = new BufferedReader(new InputStreamReader(url.openStream())).readLine();
-			if(!l.equals("OK")){System.out.println("\u001B[31m[DDNS]: \u001B[0m"+"Connection error, check the token");System.exit(1);}
-		}catch(Exception e){e.printStackTrace();}
+		if(args[6].equals("true")){
+			System.out.println("\u001B[31m[SERVER]: \u001B[0m"+"Starting DDNS");
+			try{
+				URL url = new URL("https://duckdns.org/update/"+args[0]+"/"+args[1]);
+				String l = new BufferedReader(new InputStreamReader(url.openStream())).readLine();
+				if(!l.equals("OK")){System.out.println("\u001B[31m[DDNS]: \u001B[0m"+"Connection error, check the token");System.exit(1);}
+			}catch(Exception e){e.printStackTrace();}
+		}
 
 		ServerSocket sSocket;
 		Socket s = null;
@@ -93,15 +95,21 @@ class serverThread implements Runnable {
 		pw.println(x);pw.flush();
 	}
 	private void DELIVER() throws Exception {
+		byte[] buffer = new byte[1024];
+		int bytesRead;
+		String session_ID = PHPInterpreter.randomUUID();
+
+		send("HTTP/1.1 200 OK");
+		if(mh.Cookie == null){
+			send("Set-Cookie: session_ID="+session_ID);
+			mh.Cookie = "session_ID="+session_ID;
+		}
+
 		String name = sitePath+mh.Path;
-		File x = name.endsWith(".php") ? PHP.eval(name,mh.Parameters,mh.body) : new File(name);
+		File x = name.endsWith(".php") ? PHP.eval(name,mh.Parameters,mh.body,mh.Cookie) : new File(name);
 		FileInputStream file = new FileInputStream(x);
 		DataOutputStream send = new DataOutputStream(s.getOutputStream());
 
-		byte[] buffer = new byte[1024];
-		int bytesRead;
-
-		send("HTTP/1.1 200 OK");
 		send("Content-Length: "+x.length());
 		send("");
 

@@ -21,40 +21,27 @@
  				$conn=database("chat");
  				$user=$_POST["username"];
 				$email=$_POST["email"];
- 				$query="select count(*) as tot from chat
-		 		where username='$username'";
+ 				$query="select count(*) as tot from chat where username='$username' OR email='$email'";
  				$tabella=$conn->query($query);
- 				$riga=$tabella->fetchArray;
+ 				$riga=$tabella->fetchArray();
  				$trovati=$riga["tot"];
  				if($trovati==0)
  				{
-					$query="select count(*) as tot from chat
-		 			where email='$email'";
- 					$tabella=$conn->query($query);
- 					$riga=$tabella->fetchArray;
- 					$trovati=$riga["tot"];
-					if($trovati==0)
- 					{
 					$nome=$_POST["name"];
 					$cognome=$_POST["cognome"];
-					$user=$_POST["username"];
 					$pass=$_POST["pass"];
-					if(strlen($pass)>8){
-  					$query="INSERT INTO chat(nome,cognome,username,password,email) VALUES('$nome','$cognome','$user','$pass','$email')";
+					if(strlen($pass)>=8){
+  					$query="INSERT INTO chat VALUES('$nome','$cognome','$user','$pass','$email')";
 					if ($conn->query($query)) {
-						$err="success";
+						$err="Registrazione completata!";
 					}
 					else {
     						$err="errore nella creazione del record";
-					}}
-					else{$err="password troppo corta";}}
-					else{$err="email gia registrata";}
-
- 				}
- 				else
- 				{
-					$err="utente esistente";
- 				}
+					}
+				}
+				else{$err="password troppo corta";}}
+				else{$err="email gia registrata o utente gia' esistente";}
+				echo $err;die();
  				$conn->close();
 			}
 
