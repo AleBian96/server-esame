@@ -157,12 +157,12 @@ body{
 	outline:none;
 }
 .folder span{
-	background:url("img/folder.png");
+	background:url("img/iconpack1/Folder.png");
 	background-size:3.5vmin 3.5vmin;
 	background-repeat:no-repeat;
 }
 .file span{
-	background:url("img/file.png");
+	background:url("img/iconpack1/File.png");
 	background-size:3.5vmin 3.5vmin;
 	background-repeat:no-repeat;
 }

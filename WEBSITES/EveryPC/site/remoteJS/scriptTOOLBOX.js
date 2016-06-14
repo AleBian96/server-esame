@@ -8,44 +8,39 @@ function toolBoxButton(){
 	//HOME BUTTON
 	var home = document.createElement("div");
 	home.onclick = function(){show("cd");}
-	home.innerHTML = "<img src='../remoteStyle/img/home.png' "+style+"/>";
-	tb.appendChild(home);
+	home.innerHTML = "<img src='../remoteStyle/img/iconpack1/Home.png' "+style+"/>";
 
 	//REFRESH BUTTON
 	var refresh = document.createElement("div");
 	refresh.onclick = function(){show("ls");}
-	refresh.innerHTML = "<img src='../remoteStyle/img/refresh.png' "+style+"/>";
-	tb.appendChild(refresh);
+	refresh.innerHTML = "<img src='../remoteStyle/img/iconpack1/Refresh.png' "+style+"/>";
 
 	//BACK BUTTON
 	var back = document.createElement("div");
-	back.innerHTML = "<img src='../remoteStyle/img/back.png' "+style+"/>";
+	back.innerHTML = "<img src='../remoteStyle/img/iconpack1/Previous.png' "+style+"/>";
 	back.onclick = function(){show("cd ..");}
-	tb.appendChild(back);
 
 	//NEW FILE BUTTON
 	var newF = document.createElement("div");
-	newF.innerHTML = "<img src='../remoteStyle/img/newfile.png' "+style+"/>";
+	newF.innerHTML = "<img src='../remoteStyle/img/iconpack1/Add_File.png' "+style+"/>";
 	newF.onclick = function(){
 		var epoch = (new Date).getTime();
 		var name = "FILE_"+epoch+".txt";
 		PC("nfile "+name,function(){show("ls")});
 	};
-	tb.appendChild(newF);
 
 	//NEW FOLDERBUTTON
 	var newFold = document.createElement("div");
-	newFold.innerHTML = "<img src='../remoteStyle/img/newfolder.png' "+style+"/>";
+	newFold.innerHTML = "<img src='../remoteStyle/img/iconpack1/Add_Folder.png' "+style+"/>";
 	newFold.onclick = function(){
 		var epoch = (new Date).getTime();
 		var name = "FOLDER_"+epoch;
 		PC("mkdir "+name,function(){show("ls")});
 	};
-	tb.appendChild(newFold);
 
 	//DELETE BUTTON
 	var del= document.createElement("div");
-	del.innerHTML = "<img src='../remoteStyle/img/delete.png' "+style+"/>";
+	del.innerHTML = "<img src='../remoteStyle/img/iconpack1/Delete.png' "+style+"/>";
 	del.onclick = function(){
 		if(Mode == ""){
 			Mode = "delete";
@@ -55,11 +50,10 @@ function toolBoxButton(){
 			del.classList.toggle("alert",false);
 		}
 	}
-	tb.appendChild(del);
 
 	//RENAME BUTTON
 	var ren= document.createElement("div");
-	ren.innerHTML = "<img src='../remoteStyle/img/rename.png' "+style+"/>";
+	ren.innerHTML = "<img src='../remoteStyle/img/iconpack1/Rename.png' "+style+"/>";
 	ren.onclick = function(){
 		if(Mode == ""){
 			Mode = "rename";
@@ -69,5 +63,11 @@ function toolBoxButton(){
 			ren.classList.toggle("alert",false);
 		}
 	}
+	tb.appendChild(refresh);
+	tb.appendChild(home);
+	tb.appendChild(back);
+	tb.appendChild(newF);
+	tb.appendChild(newFold);
 	tb.appendChild(ren);
+	tb.appendChild(del);
 }
