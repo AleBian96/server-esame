@@ -53,8 +53,12 @@ public class messageHandler{
 	public void handle() throws Exception {
 		this.handleHeader();
 		if(this.Method.equals("POST"))handleBody();
-		else if(this.Path.contains("?"))this.Parameters = this.Path.split("?")[1];
-		this.Parameters = Parameters == null ? "" : Parameters;
+		else if(this.Path.contains("?")){
+			String[] indexP = this.Path.split("\\?");
+			this.Path = indexP[0];
+			this.Parameters = indexP[1];
+		}
+		this.Parameters = Parameters == null ? "" : this.Parameters;
 	}
 
 	private void handleHeader() throws Exception {
@@ -161,7 +165,7 @@ public class messageHandler{
 		return true;
 	}
 
-	private String retParam(String x, String p){
+	public String retParam(String x, String p){
 		if(x.length()>p.length()){
 			if(x.startsWith(p)){
 				String s = x.replace(" ","").replace(":","");

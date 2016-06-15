@@ -3,11 +3,13 @@ import alebian.messageHandler;
 import alebian.PHPInterpreter;
 import java.io.*;
 import java.net.*;
+import java.security.SecureRandom;
+import java.nio.ByteBuffer;
 
 public class server{
 	public static void main(String args[]){
 		try{
-			for(int i=0;i<6;i++)args[i].charAt(0);
+			for(int i=0;i<7;i++)args[i].charAt(0);
 		}catch(Exception e){
 			System.out.println("\u001B[31m[ERROR]: \u001B[0m"+"Usage: server [domain_name][token][port][site_folder][site_index][DEV][DDNS]");
 			System.exit(1);
@@ -95,23 +97,21 @@ class serverThread implements Runnable {
 		pw.println(x);pw.flush();
 	}
 	private void DELIVER() throws Exception {
-		byte[] buffer = new byte[1024];
-		int bytesRead;
-		String session_ID = PHPInterpreter.randomUUID();
-
-		send("HTTP/1.1 200 OK");
-		if(mh.Cookie == null){
-			send("Set-Cookie: session_ID="+session_ID);
-			mh.Cookie = "session_ID="+session_ID;
-		}
-
 		String name = sitePath+mh.Path;
 		File x = name.endsWith(".php") ? PHP.eval(name,mh.Parameters,mh.body,mh.Cookie) : new File(name);
 		FileInputStream file = new FileInputStream(x);
 		DataOutputStream send = new DataOutputStream(s.getOutputStream());
 
+		send("HTTP/1.1 200 OK");
 		send("Content-Length: "+x.length());
+		if(mh.Cookie==null){
+			String sid = PHP.randomUUID();
+			send("Set-Cookie: PHPSESSID="+sid);
+		}
 		send("");
+
+		byte[] buffer = new byte[1024];
+		int bytesRead;
 
 		while ((bytesRead = file.read(buffer)) != -1)
 			send.write(buffer, 0, bytesRead);

@@ -7,9 +7,12 @@
 	transition: all 150ms ease-in-out;
 	outline:0;
 	border:0;
+	user-drag: none;
+	user-select: none;
 	-moz-user-select: none;
-	 -khtml-user-select: none;
- 	-webkit-user-select: none;
+	-webkit-user-drag: none;
+	-webkit-user-select: none;
+	-ms-user-select: none;
 }
 body{
 	position:absolute;
@@ -179,9 +182,10 @@ body{
 	font-weight:bold;
 }
 .reader{
-	width:64%;
+	font-family:monospace;
+	font-size:1.5vmin;
+	width:63.75%;
 	height:80%;
-	line-height:4vmin;
 	overflow:auto;
 	background:rgb(75,75,75);
 	border:0;

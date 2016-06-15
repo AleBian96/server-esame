@@ -1,31 +1,45 @@
 <?php
-	function sessionStart(){
+	session_set_save_handler("open","close","read","write","destroy","garbage");
+
+	function open($path,$name){
 		$db = database("SESSION");
-		$session_ID = $db->escapeString($_COOKIE["session_ID"]);
-		openSession($session_ID);
-		$_SESSION = readSession($session_ID);
+		$sessionId = session_id();
+		$sql = "INSERT OR IGNORE INTO session(id,data) VALUES('$sessionId','');";
+		$sql .= "UPDATE session SET lastAccess = CURRENT_TIMESTAMP WHERE id = '$sessionId'";
+		$db->exec($sql);
 	}
 
-	function openSession($session_ID){
+	function read($sessionId){
 		$db = database("SESSION");
-		$Q = "INSERT OR IGNORE INTO session(id,data) VALUES('$session_ID','');";
-		$Q .= "UPDATE session SET lastAccess = CURRENT_TIMESTAMP WHERE id = '$session_ID'";
-		$db->query($Q);
-	}
-
-	function readSession($session_ID){
-		$db = database("SESSION");
-		$Q = "SELECT data FROM session WHERE id = '$session_ID'";
-		$data = $db->query($Q)->fetchArray();
+		$sql = "SELECT data FROM session WHERE id = '$sessionId'";
+		$data = unserialize($db->query($sql)->fetchArray()["data"]);
 
 		return $data;
 	}
 
-	function writeSession($session_ID,$data){
+	function write($sessionId,$data){
 		$db = database("SESSION");
-		$data = $db->escapeString($data);
-		$Q = "INSERT OR IGNORE INTO session(id,data) VALUES('$session_ID','$data');":
-		$Q .= "UPDATE session SET data = '$data'";
-		$db->query($Q);
+		$data = $db->escapeString(serialize($data));
+		$sql = "INSERT OR IGNORE INTO session(id,data) VALUES('$sessionId','$data');";
+		$sql .= "UPDATE session SET data = '$data' WHERE id = '$sessionId'";
+		$db->exec($sql);
 	}
+
+	function close(){
+
+	}
+
+	function destroy($sessionId){
+		$db = database("SESSION");
+		$sessionId = $db->escapeString($sessionId);
+		$sql = "DELETE FROM session WHERE id=$sessionId";
+		$db->exec($sql);
+		setcookie(session_name(), "", time() - 3600);
+	}
+
+	function garbage($lifetime){
+		$db = database("SESSION");
+		$sql = "DELETE FROM session WHERE lastAccess < datetime('now','-$lifetime second')";
+		$db->exec($sql);
+ 	}
 ?>

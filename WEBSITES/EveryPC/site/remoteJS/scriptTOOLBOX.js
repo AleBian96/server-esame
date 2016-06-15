@@ -52,7 +52,7 @@ function toolBoxButton(){
 	}
 
 	//RENAME BUTTON
-	var ren= document.createElement("div");
+	var ren = document.createElement("div");
 	ren.innerHTML = "<img src='../remoteStyle/img/iconpack3/Rename.png' "+style+"/>";
 	ren.onclick = function(){
 		if(Mode == ""){
@@ -63,6 +63,23 @@ function toolBoxButton(){
 			ren.classList.toggle("alert",false);
 		}
 	}
+
+	//LOGOUT BUTTON
+	var logout = document.createElement("div");
+	logout.innerHTML = "<img src='../remoteStyle/img/iconpack3/Logout.png' "+style+"/>";
+	logout.onclick = function(){
+		var F = document.createElement("form");
+		var i = document.createElement("input");
+		i.name = "logout";
+		i.value = "true";
+		F.action = "/";
+		F.method = "POST";
+		F.appendChild(i);
+		F.submit();
+	}
+
+
+
 	tb.appendChild(refresh);
 	tb.appendChild(home);
 	tb.appendChild(back);
@@ -70,4 +87,5 @@ function toolBoxButton(){
 	tb.appendChild(newFold);
 	tb.appendChild(ren);
 	tb.appendChild(del);
+	tb.appendChild(logout);
 }

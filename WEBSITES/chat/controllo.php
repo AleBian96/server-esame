@@ -1,16 +1,11 @@
 <?php
-$username=$_POST["test"];
-if(($username)<8)
-{echo"username troppo corto";}
-else{
-	$conn=database("chat");
-	$query="select count(*) as trovati from user where username='$username'";
-			$table=$conn->query($query);
-			$riga=$table->fetch_array(mysqli_assoc);
-			if($riga["trovati"]==1){
-				echo"Username gia' esistente!";}
-			else{
-			echo"Username valido";}
-			$conn->close();
-			}
+	$db = database("chat");
+	$utente = $_POST["utente"];
+	$Q = "SELECT * FROM msg WHERE receiver='$utente'";
+	$R = $db->query($Q);
+	while ($r = $R->fetchArray()) {
+		$sender = $r["sender"];
+		$msg = $r["msg"];
+    		echo "$sender - $msg<br>";
+	}
 ?>

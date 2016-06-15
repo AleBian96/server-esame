@@ -1,21 +1,19 @@
 <?php
-sessionStart();
+	session_start();
 ?>
 <html>
 <head><title>Accesso con login</title></head>
 <body>
 <?php
-if(isset($_POST["comando"])&& $_POST["comando"]=="logout")
+if(isset($_GET["comando"])&& $_GET["comando"]=="logout")
 {
 	unset($_SESSION["utenteCollegato"]);
-	echo "Logout riuscito";
+	redirectTo("/");
 }
 else
 	if(isset($_SESSION["utenteCollegato"]))
 	{
-		$collegato=$_SESSION['utenteCollegato'];
-		echo "Sei collegato come $collegato.";
-		echo '<a href="index.php?comando=logout">Clicca qui per scollegarti </a>';
+		redirectTo("CHAT.php");
 	}
 	else
 		if(isset($_POST["user"])) //L'utente ha gi%uFFFD effettuato login
@@ -30,14 +28,13 @@ else
 		$trovati=$riga["tot"];
 		if($trovati==0) //non corrispondono username e password
 		{
-			echo "Errore: Utente non registrato. ";
+			$_SESSION["ERROR"] = "utente gia' registrato";
+			redirectTo("index.php");
 		}
 		else //nome utente e password ok
 		{
 			$_SESSION["utenteCollegato"]=$user;
-			echo "Login effettuato con successo! <br>";
-			echo $_SESSION["utenteCollegato"];
-			echo "<a href='CHAT.php'>Clicca qui per proseguire</a>";
+			redirectTo("CHAT.php");
 		}
 		$conn->close();
 	}
@@ -50,7 +47,9 @@ else
 		<input type="submit" value="LOGIN" />
 		</form>
 		<a href="registra.php">Clicca qui per registrarti!</a>
+		<br>
 		<?php
+	if(isset($_SESSION["ERROR"]))echo $_SESSION["ERROR"];
 	}
 		?>
 		</body>

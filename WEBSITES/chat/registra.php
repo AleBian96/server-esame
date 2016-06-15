@@ -19,7 +19,8 @@
 		if(isset($_POST["username"]))
 			{
  				$conn=database("chat");
- 				$user=$_POST["username"];
+ 				$username=$_POST["username"];
+				$user=$_POST["username"];
 				$email=$_POST["email"];
  				$query="select count(*) as tot from chat where username='$username' OR email='$email'";
  				$tabella=$conn->query($query);

@@ -6,8 +6,15 @@
 		return $S;
 	}
 
-	function save($dir, $text){
-		$file = fopen($dir);
-		fwrite($file,$text);
+	function redirectTo($page){
+		echo "<script>
+			window.location.replace('$page');
+		</script>";
+	}
+
+	function reloadPage(){
+		echo "<script>
+			location.reload();
+		</script>";
 	}
 ?>
