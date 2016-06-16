@@ -95,6 +95,7 @@ function show(cmd,displayN=0){
 						};
 						close.innerHTML = "Close";
 						close.onclick = function closeReader(){
+							textReader.style = "";
 							textReader.style.opacity=0;
 							fileMenu.style.opacity=0;
 							block.style.opacity=0;
@@ -121,6 +122,9 @@ function show(cmd,displayN=0){
 						document.body.appendChild(textReader);
 
 						setTimeout(function(){
+							textReader.style.left="10%";
+							textReader.style.width="83.75%";
+							textReader.style.boxShadow="black -2vmin 0 4vmin -2vmin";
 							textReader.style.opacity=1;
 							fileMenu.style.opacity=1;
 							block.style.opacity=.25;

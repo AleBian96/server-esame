@@ -1,6 +1,15 @@
 <?php
 	session_start();
-	if(isset($_SESSION["user"]))if(!isset($_POST["logout"]))redirectTo("remote.php"); else unset($_SESSION["user"]);
+
+	if(isset($_SESSION["user"])){
+		if(!isset($_POST["logout"])){
+			redirectTo("remote.php");
+		}else{
+			unset($_POST["logout"]);
+			unset($_SESSION["user"]);
+		}
+	}
+
 ?>
 <HTML>
 <link rel="stylesheet" type="text/css" href="remoteStyle/loadfonts.css">
@@ -13,34 +22,46 @@
 <form>
 <script src="remoteJS/AJAX.js"></script>
 <script>
-sexyBoot();
+sexyBoot(false);
 document.getElementsByName("name")[0].focus();
 
 function tryLogin(){
+	event.preventDefault();
 	var name = document.getElementsByName("name")[0].value;
 	var pass = document.getElementsByName("pass")[0].value;
 
 	AJAX("login.php","name="+name+"&pass="+pass,function(){
-		console.log(response);
-		if(response!="error"){}
-		else{loginError()};
+		if(response!=""){
+			loginError();
+		}else{
+			sexyExit();
+		}
 	});
 }
 
-function sexyBoot(){
-	var D = document.createElement("div");
-	D.style = "background:white;z-index:5000;position:absolute;top:0;left:0;width:100%;height:100%;"
-	document.body.appendChild(D);
+function sexyBoot(show){
+	if(show){
+		var D = document.createElement("div");
+		D.style = "background:white;z-index:5000;position:absolute;top:0;left:0;width:100%;height:100%;"
+		document.body.appendChild(D);
 
-	setTimeout(function(){D.style.opacity = 0;},500);
-	setTimeout(function(){document.body.removeChild(D)},750);
+		setTimeout(function(){D.style.opacity = 0;},500);
+		setTimeout(function(){document.body.removeChild(D)},750);
+	}else{
+		var F = document.getElementById("login");
+		F.style.opacity=0;
+		setTimeout(function(){F.style.opacity = 1;},0);
+	}
+
 }
 function loginError(){
 	var F = document.getElementById("login");
-	//CSS ANIMATION TO DO
+	F.classList.remove("loginError");
+	F.offsetWidth = F.offsetWidth;
+	F.classList.add("loginError");
+	document.getElementsByName("pass")[0].value = "";
 }
 function sexyExit(){
-	event.preventDefault();
 	var F = document.getElementById("login");
 	F.style.top = "-30%";
 	F.style.opacity = 0;

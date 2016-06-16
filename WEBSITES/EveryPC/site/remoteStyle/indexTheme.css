@@ -4,6 +4,19 @@
 	transition: all 250ms ease-in-out;
 	cursor:default;
 	overflow:hidden;
+	outline:0;
+	border:0;
+	user-drag: none;
+	user-select: none;
+	-moz-user-select: none;
+	-webkit-user-drag: none;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+}
+@keyframes errorAnimation {
+    0%   {left: 37%;}
+    50%   {left: 38%;}
+    100%   {left: 37.50%;}
 }
 body{
 	background:rgb(155,155,155);
@@ -27,6 +40,11 @@ body{
 	width:25%;
 	height:50%;
 	border-radius:2vmin;
+}
+.loginError{
+	-webkit-animation:errorAnimation 200ms 1;
+	-moz-animation:errorAnimation 200ms 1;
+	animation:errorAnimation 200ms 1;
 }
 input{
 	padding-left:1vmin;
