@@ -1,0 +1,111 @@
+*{
+	font-family:font4;
+	font-size:4vmin;
+	transition: all 250ms ease-in-out;
+	cursor:default;
+	overflow:hidden;
+	outline:0;
+	border:0;
+	user-drag: none;
+	user-select: none;
+	-moz-user-select: none;
+	-webkit-user-drag: none;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+}
+@keyframes errorAnimation {
+    0%   {left: 37%;}
+    50%   {left: 38%;}
+    100%   {left: 37.50%;}
+}
+body{
+	background:rgb(155,155,155);
+}
+::-webkit-input-placeholder{
+	text-align:center;
+	color:rgb(75,75,75);
+}
+::selection{
+	background:rgb(0, 230, 190);
+}
+::-moz-selection{
+	background:rgb(0, 230, 190);
+}
+#login{
+	overflow:visible;
+	background:rgba(75,75,75,.75);
+	position:absolute;
+	left:37.50%;
+	top:25%;
+	width:25%;
+	height:50%;
+	border-radius:2vmin;
+}
+.loginError{
+	-webkit-animation:errorAnimation 200ms 1;
+	-moz-animation:errorAnimation 200ms 1;
+	animation:errorAnimation 200ms 1;
+}
+input{
+	padding-left:2%;
+	padding-right:2%;
+
+	background:rgba(255,255,255,.5);
+	outline:none;
+	border:.6vmin solid rgb(75,75,75);
+	position:absolute;
+	width:80%;
+	height:12.5%;
+	left:6%;
+	text-align:center;
+	border-radius:5vmin;
+}
+input[name="name"]{
+	bottom:50%;
+}
+input[name="pass"]{
+	bottom:32.5%;
+}
+input[type="submit"]{
+	bottom:17.5%;
+	background:rgba(0, 230, 200,.75);
+	color:white;
+	left:10%;
+}
+input:active,input:hover, input:focus{
+	background:rgb(255,255,255);
+}
+input[type="submit"]:active, input[type="submit"]:hover, input[type="submit"]:focus{
+	background:rgb(0, 230, 190);
+}
+#rett{
+	overflow:visible;
+	background:rgb(0, 230, 190);
+	position:absolute;
+	border-radius:2vmin 2vmin 0 0;
+	z-index:2;
+	top:0;
+	left:0;
+	width:100%;
+	height:25%;
+	display: -webkit-flex; /* Safari */
+	-webkit-align-items: center; /* Safari 7.0+ */
+	display:flex;
+	align-items:center;
+
+}
+#circle{
+	position:relative;
+	margin:auto;
+	margin-top:-7.5vmin;
+	width:15vmin;
+	height:15vmin;
+	border-radius:50%;
+	background:rgb(75,75,75);
+}
+#circle p{
+	color:white;
+	text-align:center;
+	margin:auto;
+	margin-top:25%;
+}
